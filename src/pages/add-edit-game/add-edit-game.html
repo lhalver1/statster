@@ -1,0 +1,75 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Edit Game</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-item>
+    <ion-label>At Bats</ion-label>
+    <ion-select [(ngModel)]="game.AB">
+      <ion-option *ngFor="let num of getArray(0, 10)" value="{{num}}">{{num}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Hits</ion-label>
+    <ion-select [(ngModel)]="game.H">
+      <ion-option *ngFor="let num of getArray(0, game.AB)" value="{{num}}">{{num}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Doubles</ion-label>
+    <ion-select [(ngModel)]="game.double">
+      <ion-option *ngFor="let num of getArray(0, game.H)" value="{{num}}">{{num}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Triple</ion-label>
+    <ion-select [(ngModel)]="game.triple">
+      <ion-option *ngFor="let num of getArray(0, game.H)" value="{{num}}">{{num}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Home Run</ion-label>
+    <ion-select [(ngModel)]="game.HR">
+      <ion-option *ngFor="let num of getArray(0, game.H)" value="{{num}}">{{num}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>RBI</ion-label>
+    <ion-select [(ngModel)]="game.RBI">
+      <ion-option *ngFor="let num of getArray(0, 15)" value="{{num}}">{{num}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Walk</ion-label>
+    <ion-select [(ngModel)]="game.BB">
+      <ion-option *ngFor="let num of getArray(0, game.AB)" value="{{num}}">{{num}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Strike Out</ion-label>
+    <ion-select [(ngModel)]="game.K">
+      <ion-option *ngFor="let num of getArray(0, game.AB)" value="{{num}}">{{num}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-row>
+    <ion-col>
+      <div class="alert alert-danger" role="alert" *ngIf="errorMsg != ''">
+        <div>{{errorMsg}}</div>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <button ion-button full (click)="saveGame()">Save</button>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

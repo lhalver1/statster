@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Season Stats
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+
+  <ion-card id="totalStatsCard">
+    <ion-card-header>
+      Logan Halverson
+    </ion-card-header>
+    <ion-card-content class="padding-bottom-0">
+      <table id="totalStatsTable" class="table margin-bottom-0">
+        <tbody>
+          <tr>
+            <th>G</th>
+            <th>AB</th>
+            <th>R</th>
+            <th>H</th>
+            <th>2B</th>
+            <th>3B</th>
+            <th>HR</th>
+            <th>RBI</th>
+          </tr>
+          <tr class="statsRow">
+            <td>{{gameTotals.G}}</td>
+            <td>{{gameTotals.AB}}</td>
+            <td>{{gameTotals.R}}</td>
+            <td>{{gameTotals.H}}</td>
+            <td>{{gameTotals.double}}</td>
+            <td>{{gameTotals.triple}}</td>
+            <td>{{gameTotals.HR}}</td>
+            <td>{{gameTotals.RBI}}</td>
+          </tr>
+          <tr>
+            <th>BB</th>
+            <th>K</th>
+            <th>SB</th>
+            <th>CS</th>
+            <th></th>
+            <th>AVG</th>
+            <th>OBP</th>
+            <th>SLG</th>
+          </tr>
+          <tr class="statsRow">
+            <td>{{gameTotals.BB}}</td>
+            <td>{{gameTotals.K}}</td>
+            <td>{{gameTotals.SB}}</td>
+            <td>{{gameTotals.CS}}</td>
+            <td></td>
+            <td [ngClass]="{'text-success': floatToNumber(gameTotals.AVG) >= .3, 'text-danger': floatToNumber(gameTotals.AVG) <= .25 }">{{gameTotals.AVG}}</td>
+            <td>{{gameTotals.OBP}}</td>
+            <td>{{gameTotals.SLG}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list id="gamesList" padding>
+    <ion-card class="gameCard" *ngFor="let game of games">
+      <ion-card-header>
+        <span>vs {{game.opponent}} {{game.date}} </span>
+        <button ion-button outline small icon-only class="float-right" (click)="presentActionSheet(game)">
+            <ion-icon name="settings"></ion-icon>
+        </button>
+        <button ion-button outline small class="float-right">
+          <div>View</div>     
+        </button>
+      </ion-card-header>
+      <ion-card-content class="padding-bottom-0" style="margin-bottom: 0;">
+        <table id="totalStatsTable" class="table margin-bottom-0">
+          <tbody>
+            <tr>
+              <th>AB</th>
+              <th>H</th>
+              <th>K</th>
+              <th>BB</th>
+              <th>RBI</th>
+              <th>AVG</th>
+            </tr>
+            <tr class="statsRow">
+              <td>{{game.AB}}</td>
+              <td>{{game.H}}</td>
+              <td>{{game.K}}</td>
+              <td>{{game.BB}}</td>
+              <td>{{game.RBI}}</td>
+              <td>{{game.getAverage()}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+</ion-content>
